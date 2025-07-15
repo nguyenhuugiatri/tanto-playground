@@ -1,6 +1,7 @@
 @import '~@axieinfinity/matcha/dist/styles/scss/root';
 @import '~@axieinfinity/matcha/dist/styles/scss/reboot';
 @import '~@axieinfinity/matcha/dist/matcha.css';
+@import './override.scss';
 
 @tailwind base;
 @tailwind components;

@@ -156,10 +156,7 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
+      padding: '24px',
     },
     fontFamily: {
       sans: ['var(--font-work-sans)', ...fontFamily.sans],
@@ -180,6 +177,7 @@ const config: Config = {
         8: '8px',
         12: '12px',
         16: '16px',
+        20: '20px',
         24: '24px',
         32: '32px',
         circle: '50%',

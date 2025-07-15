@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Work_Sans } from 'next/font/google'
+import { Providers } from '@/contexts/providers'
 import '@/styles/globals.scss'
 
 const workSans = Work_Sans({
@@ -18,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       `}
       </style>
-      <Component {...pageProps} />
+      <Providers>
+        <Component {...pageProps} />
+      </Providers>
     </div>
   )
 }
