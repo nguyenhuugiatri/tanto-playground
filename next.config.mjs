@@ -1,6 +1,17 @@
+await import('./env.mjs')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-};
+  transpilePackages: ['@axieinfinity/matcha', '@axieinfinity/matcha-icons'],
+  sassOptions: {
+    additionalData: `
+      @import "./src/styles/matcha.scss";
+    `,
+  },
+  webpack: (config) => {
+    config.externals.push('pino-pretty', 'lokijs', 'encoding')
+    return config
+  },
+}
 
-export default nextConfig;
+export default nextConfig

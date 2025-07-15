@@ -1,0 +1,18 @@
+@import '~@axieinfinity/matcha/dist/styles/scss/root';
+@import '~@axieinfinity/matcha/dist/styles/scss/reboot';
+@import '~@axieinfinity/matcha/dist/matcha.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+}
+
+* {
+  border-color: var(--mc-border-secondary-default);
+}
+
+body {
+  font-family: var(--font-work-sans);
+}
