@@ -4,6 +4,8 @@ import { BookOpenIcon, GasPumpIcon, GithubLogoIcon, KeyIcon, PaletteIcon, Rectan
 import { TantoConnectButton, TantoEmbeddedWidget } from '@sky-mavis/tanto-widget'
 import Link from 'next/link'
 import { useState } from 'react'
+import { FadeView } from '@/components/fade-view/FadeView'
+import { MotionView } from '@/components/MotionView/MotionView'
 import { useIsClient } from '@/hooks/useIsClient'
 
 const tabs = {
@@ -24,7 +26,7 @@ const tabs = {
 export default function Home() {
   const isClient = useIsClient()
   const [tab, setTab] = useState<typeof tabs[keyof typeof tabs]['key']>(tabs.embedded.key)
-  const [collapseActiveKeys, setCollapseActiveKeys] = useState<string[]>(['1', '2'])
+  const [collapseActiveKeys, setCollapseActiveKeys] = useState<string[]>(['wallets'])
 
   const onChangeTab = (activeKey: string) => {
     setTab(activeKey)
@@ -36,11 +38,11 @@ export default function Home() {
   }
 
   return (
-    <div className="container h-screen flex flex-col pb-24">
-      <div className="py-40 mb-32 flex justify-between gap-24 border-b">
+    <div className="container flex h-screen flex-col pb-24">
+      <div className="mb-32 flex justify-between gap-24 border-b py-40">
         <div>
-          <h1 className="text-h3 mb-4">Tanto Widget</h1>
-          <p className="text-body-m text-text-subdued text-balance">
+          <h1 className="mb-4 text-h3">Tanto Widget</h1>
+          <p className="text-balance text-body-m text-text-subdued">
             A React component library designed to provide a seamless Connect Wallet experience for Web3 applications, with a focus on Ronin Wallets and Ethereum-compatible wallets.
           </p>
         </div>
@@ -53,8 +55,8 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <div className="grow flex min-h-0 gap-24">
-        <div className="w-[400px] h-full border-r pr-24 min-h-0">
+      <div className="flex min-h-0 grow gap-24">
+        <div className="h-full min-h-0 w-[400px] border-r pr-24">
           <div className="h-full overflow-auto scrollbar-none">
             {isClient && (
               <Collapse
@@ -142,17 +144,21 @@ export default function Home() {
               tab={tabs.embedded.label}
               tabKey={tabs.embedded.key}
               key={tabs.embedded.key}
-              className="flex justify-center items-center"
             >
-              <TantoEmbeddedWidget className="!w-[420px] rounded-20 !pt-12" />
+              <div className="flex h-full justify-center pt-[5%]">
+                <FadeView show>
+                  <TantoEmbeddedWidget className="h-fit !w-[420px] rounded-20 !pt-12" />
+                </FadeView>
+              </div>
             </Tabs.TabPane>
             <Tabs.TabPane
               tab={tabs.modal.label}
               tabKey={tabs.modal.key}
               key={tabs.modal.key}
-              className="flex justify-center items-center"
             >
-              <TantoConnectButton />
+              <div className="flex h-3/5 items-center justify-center">
+                <FadeView show><TantoConnectButton /></FadeView>
+              </div>
             </Tabs.TabPane>
             <Tabs.TabPane
               tab={tabs.code.label}
