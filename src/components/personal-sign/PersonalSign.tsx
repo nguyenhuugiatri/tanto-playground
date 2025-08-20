@@ -1,4 +1,4 @@
-import { Button, Input, TextArea } from '@axieinfinity/matcha'
+import { Button, TextArea } from '@axieinfinity/matcha'
 import { useState } from 'react'
 import { parseSignature, serializeSignature, verifyMessage } from 'viem'
 import { useAccount, useSignMessage } from 'wagmi'
