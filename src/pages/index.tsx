@@ -2,10 +2,13 @@ import type { Key } from 'react'
 import { Button, Collapse, Intent, Shape, Tabs, TabsVariant } from '@axieinfinity/matcha'
 import { BookOpenIcon, GasPumpIcon, GithubLogoIcon, KeyIcon, PaletteIcon, RectangleIcon, WalletIcon } from '@axieinfinity/matcha-icons'
 import { TantoConnectButton, TantoEmbeddedWidget } from '@sky-mavis/tanto-widget'
+import { useConnectCallback } from '@sky-mavis/tanto-widget/hooks/useConnectCallback'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useAccount } from 'wagmi'
 import { FadeView } from '@/components/fade-view/FadeView'
-import { MotionView } from '@/components/MotionView/MotionView'
+import Layout from '@/components/layout/Layout'
+import { PersonalSign } from '@/components/personal-sign/PersonalSign'
 import { useIsClient } from '@/hooks/useIsClient'
 
 const tabs = {
@@ -17,14 +20,15 @@ const tabs = {
     label: 'Modal',
     key: 'modal',
   },
-  code: {
-    label: 'Code',
-    key: 'code',
+  interaction: {
+    label: 'Interaction',
+    key: 'interaction',
   },
 }
 
 export default function Home() {
   const isClient = useIsClient()
+  const { isConnected } = useAccount()
   const [tab, setTab] = useState<typeof tabs[keyof typeof tabs]['key']>(tabs.embedded.key)
   const [collapseActiveKeys, setCollapseActiveKeys] = useState<string[]>(['wallets'])
 
@@ -36,6 +40,12 @@ export default function Home() {
     const keysArray = Array.isArray(activeKeys) ? activeKeys : [activeKeys]
     setCollapseActiveKeys(keysArray.map(key => String(key)))
   }
+
+  useConnectCallback({
+    onConnect: () => {
+      setTab(tabs.interaction.key)
+    },
+  })
 
   return (
     <div className="container flex h-screen flex-col pb-24">
@@ -56,7 +66,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex min-h-0 grow gap-24">
-        <div className="h-full min-h-0 w-[400px] border-r pr-24">
+        <div className="h-full min-h-0 min-w-[400px] border-r pr-24">
           <div className="h-full overflow-auto scrollbar-none">
             {isClient && (
               <Collapse
@@ -161,11 +171,23 @@ export default function Home() {
               </div>
             </Tabs.TabPane>
             <Tabs.TabPane
-              tab={tabs.code.label}
-              tabKey={tabs.code.key}
-              key={tabs.code.key}
+              tab={tabs.interaction.label}
+              tabKey={tabs.interaction.key}
+              key={tabs.interaction.key}
             >
-              TODO
+              <div className="relative flex size-full flex-col px-4 pt-16">
+                {!isConnected && (
+                  <div className="absolute left-0 top-0 z-10 size-full cursor-not-allowed backdrop-blur-sm">
+                    <div className="flex size-full h-3/5 flex-col items-center justify-center gap-4">
+                      <div className="text-h5">Wallet not connected</div>
+                      <div className="text-body-s text-text-subdued">
+                        Connect your wallet to continue.
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <PersonalSign />
+              </div>
             </Tabs.TabPane>
           </Tabs>
         </div>
@@ -173,3 +195,9 @@ export default function Home() {
     </div>
   )
 }
+
+Home.getLayout = (page: React.ReactNode) => (
+  <Layout>
+    {page}
+  </Layout>
+)
