@@ -156,7 +156,13 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '24px',
+      padding: {
+        DEFAULT: '1rem',
+        lg: '1.5rem',
+      },
+      screens: {
+        '2xl': '1440px',
+      },
     },
     fontFamily: {
       sans: ['var(--font-work-sans)', ...fontFamily.sans],

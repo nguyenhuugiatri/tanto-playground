@@ -5,11 +5,14 @@ import { domAnimation, LazyMotion } from 'motion/react'
 import { WagmiProvider } from 'wagmi'
 import { ToastProvider } from './ToastProvider'
 
+const initialChainId = 2021
+
 const config = getDefaultConfig({
   ssr: true,
   keylessWalletConfig: {
     headless: true,
     clientId: 'dbe1e3ff-e145-422f-84c4-e0beb4972f69',
+    chainId: initialChainId,
   },
   coinbaseWalletConfig: {
     enable: true,
@@ -23,6 +26,7 @@ export function Providers(props: PropsWithChildren) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <TantoProvider config={{
+          initialChainId,
           clientId: 'dbe1e3ff-e145-422f-84c4-e0beb4972f69',
           __internal_waypointBaseUrl: 'https://waypoint-api.skymavis.one/v1/rpc/public',
           __internal_mpcBaseUrl:
