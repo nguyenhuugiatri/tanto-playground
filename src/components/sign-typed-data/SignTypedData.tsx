@@ -1,3 +1,4 @@
+import type { Hex } from 'viem'
 import { Button, Intent, Shape } from '@axieinfinity/matcha'
 import { parseSignature, serializeSignature, verifyTypedData } from 'viem'
 import { useAccount, useSignTypedData } from 'wagmi'
@@ -15,6 +16,12 @@ function App() {
     <button
       onClick={() =>
         signTypedData({
+          domain: {
+            name: 'Ronin Mail',
+            chainId: 2021,
+            verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+            version: '1',
+          },
           types: {
             Person: [
               { name: 'name', type: 'string' },
@@ -48,6 +55,12 @@ function App() {
 `
 
 const signTypedDataData = {
+  domain: {
+    name: 'Ronin Mail',
+    chainId: 2021,
+    verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC' as Hex,
+    version: '1',
+  },
   types: {
     Person: [
       { name: 'name', type: 'string' },
@@ -73,7 +86,7 @@ const signTypedDataData = {
 }
 
 export function SignTypedData() {
-  const { address, isConnected } = useAccount()
+  const { address } = useAccount()
   const toast = useToast()
 
   const { data: signature, signTypedDataAsync, isPending } = useSignTypedData()
@@ -85,6 +98,7 @@ export function SignTypedData() {
 
       const signature = await signTypedDataAsync({
         types: signTypedDataData.types,
+        domain: signTypedDataData.domain,
         message: signTypedDataData.message,
         primaryType: 'Mail',
       })
@@ -92,6 +106,7 @@ export function SignTypedData() {
       const isValid = await verifyTypedData({
         address,
         primaryType: 'Mail',
+        domain: signTypedDataData.domain,
         types: signTypedDataData.types,
         message: signTypedDataData.message,
         signature: serializeSignature(parseSignature(signature)),

@@ -58,7 +58,7 @@ export function TransferRon() {
       })
 
       toast.success(
-        'Transfer RON successfully',
+        `Transfer ${ronAmount} RON successfully`,
         {
           content: (
             <Link href={`${explorerUrl}/tx/${hash}`} target="_blank" className="hover:cursor-pointer hover:underline">

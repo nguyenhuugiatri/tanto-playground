@@ -3,6 +3,7 @@ import { TantoConnectButton } from '@sky-mavis/tanto-widget'
 import { useAccount } from 'wagmi'
 import Layout from '@/components/layout/Layout'
 import { PageHeader } from '@/components/page-header/PageHeader'
+import { TransferErc20 } from '@/components/transfer-erc20/TransferErc20'
 import { TransferRon } from '@/components/transfer-ron/TransferRon'
 import { WalletCard } from '@/components/wallet-card/WalletCard'
 
@@ -33,6 +34,7 @@ export default function Transfer() {
 
         <div className="flex flex-col gap-32 px-20">
           <TransferRon />
+          <TransferErc20 />
         </div>
       </div>
     </div>

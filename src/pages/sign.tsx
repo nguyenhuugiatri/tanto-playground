@@ -21,7 +21,7 @@ export default function Sign() {
         <WalletCard className="mb-32" />
 
         {!isConnected && (
-          <div className="absolute left-0 top-0 z-10 size-full cursor-not-allowed backdrop-blur-sm">
+          <div className="absolute left-0 top-0 z-10 size-full cursor-not-allowed backdrop-blur-md">
             <div className="mt-[20vh] flex size-full flex-col items-center gap-4">
               <div className="text-h5">Wallet Not Connected</div>
               <div className="mb-32 text-body-s text-text-subdued">

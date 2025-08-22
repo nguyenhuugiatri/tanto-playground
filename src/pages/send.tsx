@@ -1,10 +1,12 @@
 import type { ReactNode } from 'react'
 import { TantoConnectButton } from '@sky-mavis/tanto-widget'
 import { useAccount } from 'wagmi'
+import { ApproveErc20 } from '@/components/approve-erc20/ApproveErc20'
 import Layout from '@/components/layout/Layout'
 import { PageHeader } from '@/components/page-header/PageHeader'
-import { TransferRon } from '@/components/transfer-ron/TransferRon'
+import { StakeAxs } from '@/components/stake-axs/StakeAxs'
 import { WalletCard } from '@/components/wallet-card/WalletCard'
+import { UnwrapRon, WrapRon } from '@/components/wrap-ron/WrapRon'
 
 export default function Send() {
   const { isConnected } = useAccount()
@@ -32,7 +34,10 @@ export default function Send() {
         )}
 
         <div className="flex flex-col gap-32 px-20">
-          <TransferRon />
+          <ApproveErc20 />
+          <StakeAxs />
+          <WrapRon />
+          <UnwrapRon />
         </div>
       </div>
     </div>
