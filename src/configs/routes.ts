@@ -19,6 +19,10 @@ export const routes = {
     '/sign',
     () => '/sign',
   ),
+  transferTokens: createRoute(
+    '/transfer',
+    () => '/transfer',
+  ),
   sendTransaction: createRoute(
     '/send',
     () => '/send',

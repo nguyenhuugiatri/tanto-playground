@@ -1,11 +1,12 @@
 import type { FC } from 'react'
-import { Button, ButtonSize } from '@axieinfinity/matcha'
+import { Button, ButtonSize, Shape } from '@axieinfinity/matcha'
 import { SignOutFillIcon } from '@axieinfinity/matcha-icons'
 import { useAccountRns, useConnectedWallet } from '@sky-mavis/tanto-widget'
 import { formatBalance } from '@sky-mavis/tanto-widget/utils/balance'
 import { truncate } from '@sky-mavis/tanto-widget/utils/string'
 import Link from 'next/link'
 import { useBalance, useDisconnect } from 'wagmi'
+import { useChainExplorerUrl } from '@/hooks/useChainExplorerUrl'
 import { cn } from '@/utils/cn'
 import { PairInfo } from '../pair-info/PairInfo'
 
@@ -18,11 +19,11 @@ export const WalletCard: FC<WalletCardProps> = ({ className }) => {
   const wallet = useConnectedWallet()
   const { data: balanceData } = useBalance({ address })
   const { disconnect } = useDisconnect()
+  const explorerUrl = useChainExplorerUrl()
 
   if (!wallet)
     return null
 
-  const explorerUrl = chain?.blockExplorers?.default.url
   const balance = balanceData
     ? `${formatBalance(balanceData.value)} ${balanceData.symbol}`
     : null
@@ -69,6 +70,7 @@ export const WalletCard: FC<WalletCardProps> = ({ className }) => {
 
         <div className="flex items-center justify-end md:col-span-2">
           <Button
+            shape={Shape.Default}
             icon={SignOutFillIcon}
             size={ButtonSize.Small}
             text="Disconnect"

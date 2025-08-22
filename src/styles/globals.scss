@@ -17,3 +17,8 @@
 body {
   font-family: var(--font-work-sans);
 }
+
+.shiki,
+.shiki span {
+  background-color: transparent !important;
+}

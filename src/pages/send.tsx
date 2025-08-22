@@ -3,18 +3,17 @@ import { TantoConnectButton } from '@sky-mavis/tanto-widget'
 import { useAccount } from 'wagmi'
 import Layout from '@/components/layout/Layout'
 import { PageHeader } from '@/components/page-header/PageHeader'
-import { PersonalSign } from '@/components/personal-sign/PersonalSign'
-import { SignTypedData } from '@/components/sign-typed-data/SignTypedData'
+import { TransferRon } from '@/components/transfer-ron/TransferRon'
 import { WalletCard } from '@/components/wallet-card/WalletCard'
 
-export default function Sign() {
+export default function Send() {
   const { isConnected } = useAccount()
 
   return (
     <div>
       <PageHeader
-        title="Sign Message"
-        description="Sign plain text (personal sign) to prove account ownership or structured data (EIP-712) for human-readable approvals and secure off-chain verification — without sending on-chain transactions."
+        title="Send Transaction"
+        description="Interact with smart contracts or transfer assets by sending transactions. This allows you to execute contract methods, update on-chain state, and move value securely across the network."
       />
 
       <div className="relative h-full">
@@ -33,12 +32,11 @@ export default function Sign() {
         )}
 
         <div className="flex flex-col gap-32 px-20">
-          <PersonalSign />
-          <SignTypedData />
+          <TransferRon />
         </div>
       </div>
     </div>
   )
 }
 
-Sign.getLayout = (page: ReactNode) => <Layout>{page}</Layout>
+Send.getLayout = (page: ReactNode) => <Layout>{page}</Layout>
