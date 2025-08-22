@@ -2,7 +2,9 @@ import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { useToast } from '@axieinfinity/matcha'
 import { Work_Sans } from 'next/font/google'
-import { Providers } from '@/contexts/providers'
+import { ToastProvider } from '@/contexts/ToastProvider'
+import { UiConfigProvider } from '@/contexts/UiConfigProvider'
+import { Web3Provider } from '@/contexts/Web3Provider'
 import '@/styles/globals.scss'
 
 const workSans = Work_Sans({
@@ -28,9 +30,13 @@ export default function App({ Component, pageProps }: AppProps & { Component: Ne
         }
       `}
       </style>
-      <Providers>
-        {getLayout(<Component {...pageProps} />)}
-      </Providers>
+      <ToastProvider>
+        <UiConfigProvider>
+          <Web3Provider>
+            {getLayout(<Component {...pageProps} />)}
+          </Web3Provider>
+        </UiConfigProvider>
+      </ToastProvider>
       {contextHolder}
     </div>
   )

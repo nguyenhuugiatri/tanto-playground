@@ -21,7 +21,8 @@
     "react-dom": "^18",
     "shiki": "^3.11.0",
     "viem": "2.x",
-    "wagmi": "^2.15.6"
+    "wagmi": "^2.15.6",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.17.0",
