@@ -3,15 +3,17 @@ import { ListIcon, XIcon } from '@axieinfinity/matcha-icons'
 import { useState } from 'react'
 import { useIsClient } from '@/hooks/useIsClient'
 import { cn } from '@/utils/cn'
+import Link from 'next/link'
+import { routes } from '@/configs/routes'
 
 export function SidebarLogo() {
   return (
-    <div className="px-8 py-18 sm:border-b sm:px-20">
+    <Link href={routes.connect.resolvePath()} className="px-8 py-18 sm:border-b sm:px-20">
       <div className="flex w-fit items-center justify-center gap-8">
         <img src="/images/ronin-logo.svg" alt="Ronin Logo" className="size-24" />
         <span className="text-h6 text-text-default">Tanto Widget</span>
       </div>
-    </div>
+    </Link>
   )
 }
 

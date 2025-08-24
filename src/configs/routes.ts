@@ -1,6 +1,6 @@
 interface RouteDefinition<TParams extends object> {
   path: string
-  resolvePath: (params: TParams) => string
+  resolvePath: (params?: TParams) => string
 }
 
 function createRoute<TParams extends object>(
