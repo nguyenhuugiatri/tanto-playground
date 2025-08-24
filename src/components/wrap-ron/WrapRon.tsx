@@ -47,7 +47,7 @@ function App() {
 `
 
 export function WrapRon() {
-  const { address } = useAccount()
+  const { isConnected, address } = useAccount()
   const toast = useToast()
   const explorerUrl = useChainExplorerUrl()
 
@@ -120,7 +120,7 @@ export function WrapRon() {
           <Button
             text="Wrap RON"
             shape={Shape.Default}
-            intent={Intent.Primary}
+            intent={isConnected ? Intent.Primary : Intent.Default}
             disabled={!ronAmount || !address}
             onClick={handleWrap}
           />
@@ -171,7 +171,7 @@ function App() {
 `
 
 export function UnwrapRon() {
-  const { address } = useAccount()
+  const { isConnected, address } = useAccount()
   const toast = useToast()
   const explorerUrl = useChainExplorerUrl()
 
@@ -244,7 +244,7 @@ export function UnwrapRon() {
           <Button
             text="Unwrap RON"
             shape={Shape.Default}
-            intent={Intent.Primary}
+            intent={isConnected ? Intent.Primary : Intent.Default}
             disabled={!ronAmount || !address}
             onClick={handleUnwrap}
           />

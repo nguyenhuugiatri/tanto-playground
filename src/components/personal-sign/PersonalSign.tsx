@@ -26,7 +26,7 @@ function App() {
 `
 
 export function PersonalSign() {
-  const { address } = useAccount()
+  const { isConnected, address } = useAccount()
   const toast = useToast()
 
   const [message, setMessage] = useState(defaultMessage)
@@ -76,7 +76,7 @@ export function PersonalSign() {
           <Button
             text="Sign message"
             shape={Shape.Default}
-            intent={Intent.Primary}
+            intent={isConnected ? Intent.Primary : Intent.Default}
             disabled={!message}
             onClick={handleSign}
           />

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { isAddress, parseEther } from 'viem'
 
-import { useSendTransaction } from 'wagmi'
+import { useAccount, useSendTransaction } from 'wagmi'
 import { useChainExplorerUrl } from '@/hooks/useChainExplorerUrl'
 import { useToast } from '@/hooks/useToast'
 import { CodeExample } from '../code/code-example'
@@ -37,7 +37,7 @@ function App() {
 export function TransferRon() {
   const toast = useToast()
   const explorerUrl = useChainExplorerUrl()
-
+  const { isConnected } = useAccount()
   const [ronAmount, setRonAmount] = useState<string>(defaultRonAmount)
   const [toAddress, setToAddress] = useState<string>(defaultToAddress)
 
@@ -106,7 +106,7 @@ export function TransferRon() {
           <Button
             text="Send RON"
             shape={Shape.Default}
-            intent={Intent.Primary}
+            intent={isConnected ? Intent.Primary : Intent.Default}
             disabled={!ronAmount || !toAddress}
             onClick={handleTransferRon}
           />

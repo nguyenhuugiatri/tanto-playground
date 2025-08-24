@@ -45,7 +45,7 @@ function App() {
 `
 
 export function StakeAxs() {
-  const { address } = useAccount()
+  const { isConnected, address } = useAccount()
   const toast = useToast()
   const explorerUrl = useChainExplorerUrl()
 
@@ -119,7 +119,7 @@ export function StakeAxs() {
           <Button
             text="Stake AXS"
             shape={Shape.Default}
-            intent={Intent.Primary}
+            intent={isConnected ? Intent.Primary : Intent.Default}
             disabled={!axsAmount || !address}
             onClick={handleStakeAxs}
           />

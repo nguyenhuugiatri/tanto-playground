@@ -86,7 +86,7 @@ const signTypedDataData = {
 }
 
 export function SignTypedData() {
-  const { address } = useAccount()
+  const { isConnected, address } = useAccount()
   const toast = useToast()
 
   const { data: signature, signTypedDataAsync, isPending } = useSignTypedData()
@@ -140,7 +140,7 @@ export function SignTypedData() {
           <Button
             text="Sign message"
             shape={Shape.Default}
-            intent={Intent.Primary}
+            intent={isConnected ? Intent.Primary : Intent.Default}
             onClick={handleSign}
           />
           <ResultBox isPending={isPending} label="signature" value={signature} />

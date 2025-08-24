@@ -2,7 +2,7 @@ import { Button, Input, Intent, Shape } from '@axieinfinity/matcha'
 import Link from 'next/link'
 import { useState } from 'react'
 import { isAddress, parseUnits } from 'viem'
-import { useWriteContract } from 'wagmi'
+import { useAccount, useWriteContract } from 'wagmi'
 
 import { useChainExplorerUrl } from '@/hooks/useChainExplorerUrl'
 import { useToast } from '@/hooks/useToast'
@@ -51,7 +51,7 @@ function App() {
 export function TransferErc20() {
   const toast = useToast()
   const explorerUrl = useChainExplorerUrl()
-
+  const { isConnected } = useAccount()
   const [axsAmount, setAxsAmount] = useState<string>(defaultAxsAmount)
   const [toAddress, setToAddress] = useState<string>(defaultToAddress)
 
@@ -133,7 +133,7 @@ export function TransferErc20() {
           <Button
             text="Send AXS"
             shape={Shape.Default}
-            intent={Intent.Primary}
+            intent={isConnected ? Intent.Primary : Intent.Default}
             disabled={!axsAmount || !toAddress}
             onClick={handleTransferAxs}
           />
