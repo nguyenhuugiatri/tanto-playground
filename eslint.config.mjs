@@ -8,4 +8,7 @@ export default antfu({
   react: true,
 }, ...compat.config({
   extends: ['plugin:tailwindcss/recommended'],
+  rules: {
+    'react-refresh/only-export-components': 'off',
+  },
 }))

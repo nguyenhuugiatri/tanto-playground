@@ -47,7 +47,7 @@ const Layout: NextPage<Props> = ({ children }) => {
         onLinkClick={handleLinkClick}
       />
       <div className="flex grow flex-col overflow-auto">
-        <div className="container flex h-screen flex-col pb-24">{children}</div>
+        <div className="container flex h-screen flex-col pb-24 max-w-screen-xl">{children}</div>
       </div>
     </div>
   )

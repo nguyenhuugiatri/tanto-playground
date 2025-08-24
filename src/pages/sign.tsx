@@ -17,7 +17,7 @@ export default function Sign() {
         description="Sign plain text (personal sign) to prove account ownership or structured data (EIP-712) for human-readable approvals and secure off-chain verification — without sending on-chain transactions."
       />
 
-      <div className="relative h-full">
+      <div className="relative pb-[10vh]">
         <WalletCard className="mb-32" />
 
         {!isConnected && (

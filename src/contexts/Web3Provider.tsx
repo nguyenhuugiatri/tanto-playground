@@ -24,7 +24,10 @@ const queryClient = new QueryClient()
 
 export function Web3Provider(props: PropsWithChildren) {
   const theme = useUiConfigStore(state => state.theme)
-  const createAccountOnConnect = useUiConfigStore(state => state.createAccountOnConnect)
+  const { createAccountOnConnect, excludedWalletIds } = useUiConfigStore(state => ({
+    createAccountOnConnect: state.createAccountOnConnect,
+    excludedWalletIds: state.excludedWalletIds,
+  }))
 
   return (
     <WagmiProvider config={config}>
@@ -34,6 +37,7 @@ export function Web3Provider(props: PropsWithChildren) {
           config={{
             initialChainId,
             createAccountOnConnect,
+            excludedWalletIds,
             clientId: 'dbe1e3ff-e145-422f-84c4-e0beb4972f69',
             __internal_waypointBaseUrl: 'https://waypoint-api.skymavis.one/v1/rpc/public',
             __internal_mpcBaseUrl:

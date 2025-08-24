@@ -17,7 +17,7 @@ export default function Transfer() {
         description="Transfer RON or ERC20 tokens. This allows you to move value between wallets."
       />
 
-      <div className="relative h-full">
+      <div className="relative pb-[10vh]">
         <WalletCard className="mb-32" />
 
         {!isConnected && (

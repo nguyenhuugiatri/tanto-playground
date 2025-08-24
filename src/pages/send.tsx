@@ -18,7 +18,7 @@ export default function Send() {
         description="Interact with smart contracts or transfer assets by sending transactions. This allows you to execute contract methods, update on-chain state, and move value securely across the network."
       />
 
-      <div className="relative h-full">
+      <div className="relative pb-[10vh]">
         <WalletCard className="mb-32" />
 
         {!isConnected && (

@@ -1,11 +1,14 @@
-import type { TantoWidgetThemeMode, Wallet } from '@sky-mavis/tanto-widget'
+import type { TantoWidgetThemeMode } from '@sky-mavis/tanto-widget'
 import type { Key, ReactNode } from 'react'
 import { Checkbox, Collapse, Input, Radio, Shape, Switch, Tabs, TabsVariant } from '@axieinfinity/matcha'
 import { GasPumpIcon, PaletteIcon, RectangleIcon, ShareNetworkIcon, WalletIcon } from '@axieinfinity/matcha-icons'
 import { TantoConnectButton, TantoEmbeddedWidget } from '@sky-mavis/tanto-widget'
-import { useWallets } from '@sky-mavis/tanto-widget/hooks/useWallets'
+import { walletConfigs } from '@sky-mavis/tanto-widget/configs/walletConfigs'
+import { WALLET_IDS } from '@sky-mavis/tanto-widget/constants'
+import { isRoninWalletHeadlessConnector, isRoninWalletInjected, isSafeConnector, isWaypointConnector } from '@sky-mavis/tanto-widget/utils/walletDetection'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useConnectors } from 'wagmi'
 import { FadeView } from '@/components/fade-view/FadeView'
 import Layout from '@/components/layout/Layout'
 import { PageHeader } from '@/components/page-header/PageHeader'
@@ -17,28 +20,52 @@ const tabs = {
   modal: { label: 'Modal', key: 'modal' },
 }
 
+const SAME_WALLET_GROUPS: string[][] = [
+  [WALLET_IDS.RONIN_WALLET, WALLET_IDS.RONIN_WALLET_INJECTED],
+  [WALLET_IDS.WAYPOINT, WALLET_IDS.RONIN_WALLET_HEADLESS],
+]
+
+function findWalletGroup(walletId: string) {
+  return SAME_WALLET_GROUPS.find(group => group.includes(walletId)) ?? [walletId]
+}
+
 export function WalletConfig() {
-  const { primaryWallets, secondaryWallets } = useWallets()
-  const wallets = [...primaryWallets, ...secondaryWallets]
+  const connectors = useConnectors()
+  const { excludedWalletIds, setExcludedWalletIds } = useUiConfigStore(state => ({
+    excludedWalletIds: state.excludedWalletIds,
+    setExcludedWalletIds: state.setExcludedWalletIds,
+  }))
+
+  const filteredConnectors = connectors.filter(connector => !isWaypointConnector(connector.id) && !isRoninWalletInjected(connector.id) && !isSafeConnector(connector.id)).sort((a, b) => isRoninWalletHeadlessConnector(a.id) ? -1 : isRoninWalletHeadlessConnector(b.id) ? 1 : 0)
+
+  const handleCheckboxChange = (walletId: string, checked: boolean) => {
+    const group = findWalletGroup(walletId)
+
+    setExcludedWalletIds(
+      checked
+        ? excludedWalletIds.filter(id => !group.includes(id))
+        : Array.from(new Set([...excludedWalletIds, ...group])),
+    )
+  }
 
   return (
     <div className="flex flex-col gap-16">
-      {wallets.map((wallet) => {
-        return (
-          <Checkbox
-            className="items-center gap-4"
-            key={wallet.id}
-            label={(
-              <div key={wallet.id} className="flex items-center gap-8">
-                <div className="size-32 overflow-hidden rounded-8 [&_*]:size-32 [&_div[class*='RoninBadgeWrapper']_svg]:size-12">
-                  {wallet.icon}
-                </div>
-                <p>{wallet.name}</p>
+      {filteredConnectors.map(connector => (
+        <Checkbox
+          key={connector.id}
+          className="items-center gap-4"
+          label={(
+            <div className="flex items-center gap-8">
+              <div className="size-32 overflow-hidden rounded-8 [&_*]:size-32 [&_div[class*='RoninBadgeWrapper']_svg]:size-12">
+                <>{walletConfigs[connector.id]?.icon ? walletConfigs[connector.id].icon : <img src={connector.icon} alt={connector.name} />}</>
               </div>
-            )}
-          />
-        )
-      })}
+              <p>{connector.name}</p>
+            </div>
+          )}
+          checked={!excludedWalletIds.includes(connector.id)}
+          onChange={e => handleCheckboxChange(connector.id, e.target.checked)}
+        />
+      ))}
     </div>
   )
 }
@@ -126,7 +153,7 @@ export default function Connect() {
         title="Tanto Widget"
         description="A React component library designed to provide a seamless Connect Wallet experience for Web3 applications, with a focus on Ronin Wallets and Ethereum-compatible wallets."
       />
-      <div className="flex min-h-0 grow gap-24">
+      <div className="flex min-h-0 grow gap-24 pb-[10vh]">
         <div className="h-full min-h-0 min-w-[400px] border-r pr-24">
           <div className="-m-8 h-full overflow-auto p-8 scrollbar-none">
             {isClient && (
