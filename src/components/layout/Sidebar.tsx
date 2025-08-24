@@ -65,7 +65,7 @@ export function Sidebar({ menuItems, linkItems, pathname, onMenuClick, onLinkCli
 }
 
 export function MobileSidebar({ menuItems, linkItems, pathname, onMenuClick, onLinkClick }: any) {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const isClient = useIsClient()
 
   const handleMenuClick = (item: any) => {
@@ -77,7 +77,7 @@ export function MobileSidebar({ menuItems, linkItems, pathname, onMenuClick, onL
     return null
 
   return (
-    <div>
+    <div className="sticky top-0 z-[100] bg-black-9">
       <div className="flex w-full items-center gap-2 border-b pl-8 pr-24">
         <IconButton
           icon={ListIcon}

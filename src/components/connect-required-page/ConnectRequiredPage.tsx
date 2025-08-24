@@ -32,7 +32,7 @@ export function ConnectRequiredPage({ title, description, children }: ConnectReq
           </div>
         )}
 
-        <div className="flex flex-col gap-32 px-20">{children}</div>
+        <div className="flex flex-col gap-32 px-8 sm:px-20">{children}</div>
       </div>
     </div>
   )

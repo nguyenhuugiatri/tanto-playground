@@ -154,7 +154,7 @@ export default function Connect() {
         description="A React component library designed to provide a seamless Connect Wallet experience for Web3 applications, with a focus on Ronin Wallets and Ethereum-compatible wallets."
       />
       <div className="flex min-h-0 grow flex-col gap-24 pb-[10vh] sm:flex-row">
-        <div className="order-2 h-full min-h-0 min-w-[400px] sm:order-1 sm:border-r sm:pr-24">
+        <div className="order-2 h-full min-h-0 sm:min-w-[400px] sm:order-1 sm:border-r sm:pr-24">
           <div className="-m-8 h-full overflow-auto p-8 scrollbar-none">
             {isClient && (
               <Collapse

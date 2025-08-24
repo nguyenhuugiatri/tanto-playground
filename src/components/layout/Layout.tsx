@@ -61,7 +61,7 @@ const Layout: NextPage<Props> = ({ children }) => {
             />
           )}
       <div className="flex grow flex-col overflow-auto">
-        <div className="container flex h-screen max-w-screen-xl flex-col pb-24">{children}</div>
+        <div className="container flex sm:h-screen max-w-screen-xl flex-col pb-24">{children}</div>
       </div>
     </div>
   )
