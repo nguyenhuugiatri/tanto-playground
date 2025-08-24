@@ -36,7 +36,7 @@ export const WalletCard: FC<WalletCardProps> = ({ className }) => {
             label="Wallet"
             value={(
               <div className="flex items-center gap-8">
-                <span className="text-body-m-strong">{wallet.name}</span>
+                <span>{wallet.name}</span>
                 <img className="size-20" src={wallet.icon} alt={wallet.name} />
               </div>
             )}

@@ -9,9 +9,10 @@ import {
   SidebarIcon,
   WalletIcon,
 } from '@axieinfinity/matcha-icons'
+import { useIsMobileView } from '@sky-mavis/tanto-widget/hooks/useIsMobileView'
 import { usePathname, useRouter } from 'next/navigation'
 import { routes } from '@/configs/routes'
-import { Sidebar } from './Sidebar'
+import { MobileSidebar, Sidebar } from './Sidebar'
 
 interface Props {
   children: ReactNode
@@ -33,21 +34,34 @@ const linkItems = [
 const Layout: NextPage<Props> = ({ children }) => {
   const pathname = usePathname()
   const router = useRouter()
+  const isMobileView = useIsMobileView()
 
   const handleMenuClick = (item: any) => router.push(item.path)
   const handleLinkClick = (item: any) => window.open(item.href, '_blank')
 
   return (
-    <div className="flex size-full">
-      <Sidebar
-        menuItems={menuItems}
-        linkItems={linkItems}
-        pathname={pathname}
-        onMenuClick={handleMenuClick}
-        onLinkClick={handleLinkClick}
-      />
+    <div className="flex size-full flex-col sm:flex-row">
+      {isMobileView
+        ? (
+            <MobileSidebar
+              menuItems={menuItems}
+              linkItems={linkItems}
+              pathname={pathname}
+              onMenuClick={handleMenuClick}
+              onLinkClick={handleLinkClick}
+            />
+          )
+        : (
+            <Sidebar
+              menuItems={menuItems}
+              linkItems={linkItems}
+              pathname={pathname}
+              onMenuClick={handleMenuClick}
+              onLinkClick={handleLinkClick}
+            />
+          )}
       <div className="flex grow flex-col overflow-auto">
-        <div className="container flex h-screen flex-col pb-24 max-w-screen-xl">{children}</div>
+        <div className="container flex h-screen max-w-screen-xl flex-col pb-24">{children}</div>
       </div>
     </div>
   )

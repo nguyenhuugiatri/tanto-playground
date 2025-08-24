@@ -153,8 +153,8 @@ export default function Connect() {
         title="Tanto Widget"
         description="A React component library designed to provide a seamless Connect Wallet experience for Web3 applications, with a focus on Ronin Wallets and Ethereum-compatible wallets."
       />
-      <div className="flex min-h-0 grow gap-24 pb-[10vh]">
-        <div className="h-full min-h-0 min-w-[400px] border-r pr-24">
+      <div className="flex min-h-0 grow flex-col gap-24 pb-[10vh] sm:flex-row">
+        <div className="order-2 h-full min-h-0 min-w-[400px] sm:order-1 sm:border-r sm:pr-24">
           <div className="-m-8 h-full overflow-auto p-8 scrollbar-none">
             {isClient && (
               <Collapse
@@ -173,7 +173,7 @@ export default function Connect() {
           </div>
         </div>
 
-        <div className="grow">
+        <div className="order-1 grow sm:order-2">
           <Tabs
             destroyInactiveTabPane
             variant={TabsVariant.Border}
@@ -189,7 +189,7 @@ export default function Connect() {
               </div>
             </Tabs.TabPane>
             <Tabs.TabPane tab={tabs.modal.label} tabKey={tabs.modal.key} key={tabs.modal.key}>
-              <div className="flex h-3/5 items-center justify-center">
+              <div className="flex items-center justify-center pt-[5%] sm:h-3/5">
                 <FadeView show>
                   <TantoConnectButton label={buttonLabel} />
                 </FadeView>

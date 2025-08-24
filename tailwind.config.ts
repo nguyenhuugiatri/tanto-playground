@@ -160,9 +160,6 @@ const config: Config = {
         DEFAULT: '1rem',
         lg: '1.5rem',
       },
-      screens: {
-        '2xl': '1440px',
-      },
     },
     fontFamily: {
       sans: ['var(--font-work-sans)', ...fontFamily.sans],
@@ -172,6 +169,10 @@ const config: Config = {
     spacing: generatePreset(0, 100, i => `${i}px`),
     lineHeight: generatePreset(0, 100, i => `${i}px`),
     extend: {
+      screens: {
+        'sm': '576px',
+        '2xl': '1440px',
+      },
       colors: {
         ...MATCHA_COLORS,
         ...MATCHA_TOKENS,

@@ -10,11 +10,11 @@ interface PairInfoProps {
 
 export const PairInfo: FC<PairInfoProps> = ({ className, label, value }) => (
   <div className={cn('flex flex-col space-y-4', className)}>
-    <p className="text-body-xs text-text-subdued sm:text-body-s">
+    <p className="text-body-s text-text-subdued">
       {label}
     </p>
 
-    <Emptyable className="text-body-s-strong sm:text-body-m-strong">
+    <Emptyable className="text-body-m-strong">
       {value}
     </Emptyable>
   </div>

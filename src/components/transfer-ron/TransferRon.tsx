@@ -61,7 +61,7 @@ export function TransferRon() {
         `Transfer ${ronAmount} RON successfully`,
         {
           content: (
-            <Link href={`${explorerUrl}/tx/${hash}`} target="_blank" className="hover:cursor-pointer hover:underline">
+            <Link href={`${explorerUrl}/tx/${hash}`} target="_blank" className="break-before-all hover:cursor-pointer hover:underline">
               {`${explorerUrl}/tx/${hash}`}
             </Link>
           ),

@@ -1,9 +1,12 @@
-import { Menu } from '@axieinfinity/matcha'
+import { ButtonVariant, Drawer, IconButton, Menu, Shape } from '@axieinfinity/matcha'
+import { ListIcon, XIcon } from '@axieinfinity/matcha-icons'
+import { useState } from 'react'
+import { useIsClient } from '@/hooks/useIsClient'
 import { cn } from '@/utils/cn'
 
 export function SidebarLogo() {
   return (
-    <div className="border-b px-20 py-18">
+    <div className="px-8 py-18 sm:border-b sm:px-20">
       <div className="flex w-fit items-center justify-center gap-8">
         <img src="/images/ronin-logo.svg" alt="Ronin Logo" className="size-24" />
         <span className="text-h6 text-text-default">Tanto Widget</span>
@@ -57,6 +60,57 @@ export function Sidebar({ menuItems, linkItems, pathname, onMenuClick, onLinkCli
           <SidebarMenu items={linkItems} onNavigate={onLinkClick} />
         </div>
       </div>
+    </div>
+  )
+}
+
+export function MobileSidebar({ menuItems, linkItems, pathname, onMenuClick, onLinkClick }: any) {
+  const [isOpen, setIsOpen] = useState(true)
+  const isClient = useIsClient()
+
+  const handleMenuClick = (item: any) => {
+    setIsOpen(false)
+    onMenuClick(item)
+  }
+
+  if (!isClient)
+    return null
+
+  return (
+    <div>
+      <div className="flex w-full items-center gap-2 border-b pl-8 pr-24">
+        <IconButton
+          icon={ListIcon}
+          variant={ButtonVariant.Plain}
+          onClick={() => setIsOpen(true)}
+        />
+        <SidebarLogo />
+      </div>
+      <Drawer
+        placement="left"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        bodyClassName="p-0 bg-black-9"
+        header={(
+          <div className="flex w-full items-center justify-between border-b border-r bg-black-9 py-9 pl-20 pr-8">
+            <h1 className="text-h6">Menu</h1>
+            <IconButton
+              icon={XIcon}
+              variant={ButtonVariant.Plain}
+              onClick={() => setIsOpen(false)}
+            />
+          </div>
+        )}
+      >
+        <div className="flex h-full min-w-[280px] flex-col border-r">
+          <div className="flex grow flex-col justify-between">
+            <SidebarMenu items={menuItems} activePath={pathname} onNavigate={handleMenuClick} />
+            <div className="border-t">
+              <SidebarMenu items={linkItems} onNavigate={onLinkClick} />
+            </div>
+          </div>
+        </div>
+      </Drawer>
     </div>
   )
 }
