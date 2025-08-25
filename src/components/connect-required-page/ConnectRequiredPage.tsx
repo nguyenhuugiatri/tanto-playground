@@ -8,14 +8,16 @@ interface ConnectRequiredPageProps {
   title: string
   description: string
   children: ReactNode
+  docsLink?: string
+  repoLink?: string
 }
 
-export function ConnectRequiredPage({ title, description, children }: ConnectRequiredPageProps) {
+export function ConnectRequiredPage({ title, description, children, docsLink, repoLink }: ConnectRequiredPageProps) {
   const { isConnected } = useAccount()
 
   return (
     <div>
-      <PageHeader title={title} description={description} />
+      <PageHeader title={title} description={description} docsLink={docsLink} repoLink={repoLink} />
 
       <div className="relative pb-[10vh]">
         <WalletCard className="mb-32" />
@@ -32,7 +34,7 @@ export function ConnectRequiredPage({ title, description, children }: ConnectReq
           </div>
         )}
 
-        <div className="flex flex-col gap-32 px-8 sm:px-20">{children}</div>
+        <div className="flex flex-col gap-32 px-8 md:px-20">{children}</div>
       </div>
     </div>
   )

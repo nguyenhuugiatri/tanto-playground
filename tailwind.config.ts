@@ -170,7 +170,6 @@ const config: Config = {
     lineHeight: generatePreset(0, 100, i => `${i}px`),
     extend: {
       screens: {
-        'sm': '576px',
         '2xl': '1440px',
       },
       colors: {

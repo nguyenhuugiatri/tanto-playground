@@ -12,7 +12,7 @@ const defaultToastOptions: ToastConfig = {
 }
 
 function ContentWrapper({ children }: { children: ReactNode }) {
-  return <div className="min-w-[300px] max-w-[440px] break-all">{children}</div>
+  return <div className="break-all sm:min-w-[300px] sm:max-w-[440px]">{children}</div>
 }
 
 export function useToast() {

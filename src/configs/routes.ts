@@ -27,4 +27,8 @@ export const routes = {
     '/send',
     () => '/send',
   ),
+  buyCrypto: createRoute(
+    '/buy',
+    () => '/buy',
+  ),
 }

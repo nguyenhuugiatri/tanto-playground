@@ -1,52 +1,63 @@
 import type { NextPage } from 'next'
 import type { ReactNode } from 'react'
+import type { SidebarItem } from '../sidebar/Sidebar'
 import {
-  ArrowsDownUpIcon,
+  ArrowsLeftRightIcon,
   BookOpenIcon,
-  GithubLogoIcon,
+  FileImageIcon,
   GridFourIcon,
   KeyIcon,
+  PaperPlaneTiltIcon,
+  PlusIcon,
   SidebarIcon,
-  WalletIcon,
 } from '@axieinfinity/matcha-icons'
 import { useIsMobileView } from '@sky-mavis/tanto-widget/hooks/useIsMobileView'
 import { usePathname, useRouter } from 'next/navigation'
+import { MOBILE_BREAKPOINT } from '@/configs/constants'
 import { routes } from '@/configs/routes'
-import { MobileSidebar, Sidebar } from './Sidebar'
+import { MobileSidebar, Sidebar } from '../sidebar/Sidebar'
 
 interface Props {
   children: ReactNode
 }
 
-const menuItems = [
+const menuItems: SidebarItem[] = [
   { label: 'Connect', path: routes.connect.path, key: 'connect', icon: GridFourIcon },
   { label: 'Sign Message', path: routes.signMessage.path, key: 'sign-message', icon: KeyIcon },
-  { label: 'Transfer Tokens', path: routes.transferTokens.path, key: 'transfer-tokens', icon: WalletIcon },
-  { label: 'Send Transaction', path: routes.sendTransaction.path, key: 'send-transaction', icon: ArrowsDownUpIcon },
-] as const
+  { label: 'Transfer Tokens', path: routes.transferTokens.path, key: 'transfer-tokens', icon: PaperPlaneTiltIcon },
+  { label: 'Send Transaction', path: routes.sendTransaction.path, key: 'send-transaction', icon: ArrowsLeftRightIcon },
+  { label: 'Buy Crypto', path: routes.buyCrypto.path, key: 'buy-crypto', icon: PlusIcon },
+]
 
-const linkItems = [
-  { label: 'Dashboard', href: 'https://developers.roninchain.com/console', key: 'dashboard', icon: SidebarIcon },
-  { label: 'Documentation', href: 'https://github.com/skymavis/tanto-kit/blob/main/packages/widget/README.md', key: 'documentation', icon: BookOpenIcon },
-  { label: 'Repository', href: 'https://github.com/skymavis/tanto-kit', key: 'repository', icon: GithubLogoIcon },
-] as const
+const linkItems: SidebarItem[] = [
+  { label: 'Developer Console', href: 'https://developers.roninchain.com/console', key: 'dashboard', icon: SidebarIcon },
+  { label: 'Mavis Documentation', href: 'https://docs.skymavis.com/', key: 'documentation', icon: BookOpenIcon },
+  { label: 'Ronin Assets', href: 'https://github.com/ronin-chain/ronin-assets', key: 'ronin-assets', icon: FileImageIcon },
+]
 
 const Layout: NextPage<Props> = ({ children }) => {
   const pathname = usePathname()
   const router = useRouter()
-  const isMobileView = useIsMobileView()
+  const isMobileView = useIsMobileView(MOBILE_BREAKPOINT)
 
-  const handleMenuClick = (item: any) => router.push(item.path)
-  const handleLinkClick = (item: any) => window.open(item.href, '_blank')
+  const handleMenuClick = (item: SidebarItem) => {
+    if (item.path)
+      router.push(item.path)
+  }
+
+  const handleLinkClick = (item: SidebarItem) => {
+    if (item.href)
+      window.open(item.href, '_blank')
+  }
 
   return (
-    <div className="flex size-full flex-col sm:flex-row">
+    <div className="flex size-full flex-col md:flex-row">
       {isMobileView
         ? (
             <MobileSidebar
               menuItems={menuItems}
               linkItems={linkItems}
-              pathname={pathname}
+              pathname={pathname ?? undefined}
               onMenuClick={handleMenuClick}
               onLinkClick={handleLinkClick}
             />
@@ -55,13 +66,15 @@ const Layout: NextPage<Props> = ({ children }) => {
             <Sidebar
               menuItems={menuItems}
               linkItems={linkItems}
-              pathname={pathname}
+              pathname={pathname ?? undefined}
               onMenuClick={handleMenuClick}
               onLinkClick={handleLinkClick}
             />
           )}
       <div className="flex grow flex-col overflow-auto">
-        <div className="container flex sm:h-screen max-w-screen-xl flex-col pb-24">{children}</div>
+        <div className="container flex max-w-screen-xl flex-col pb-24 md:h-screen">
+          {children}
+        </div>
       </div>
     </div>
   )
