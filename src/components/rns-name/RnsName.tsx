@@ -33,7 +33,7 @@ export function RnsName() {
       header={{
         title: 'RNS Name',
         description:
-          'Retrieves the primary name associated with a given wallet address.',
+          'Retrieves the primary name associated with a given wallet address. This demo is using the Saigon testnet.',
       }}
       lang="tsx"
       preview={(

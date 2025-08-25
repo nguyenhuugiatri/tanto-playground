@@ -33,7 +33,7 @@ export function RnsAddress() {
       header={{
         title: 'RNS Address',
         description:
-          'Resolves a Ronin name to its corresponding wallet address.',
+          'Resolves a Ronin name to its corresponding wallet address. This demo is using the Saigon testnet.',
       }}
       lang="tsx"
       preview={(
