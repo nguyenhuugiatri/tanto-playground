@@ -5,6 +5,7 @@ import {
   ArrowsLeftRightIcon,
   BookOpenIcon,
   FileImageIcon,
+  GasPumpIcon,
   GridFourIcon,
   KeyIcon,
   PaperPlaneTiltIcon,
@@ -32,7 +33,8 @@ const menuItems: SidebarItem[] = [
 const linkItems: SidebarItem[] = [
   { label: 'Developer Console', href: 'https://developers.roninchain.com/console', key: 'dashboard', icon: SidebarIcon },
   { label: 'Mavis Documentation', href: 'https://docs.skymavis.com/', key: 'documentation', icon: BookOpenIcon },
-  { label: 'Ronin Assets', href: 'https://github.com/ronin-chain/ronin-assets', key: 'ronin-assets', icon: FileImageIcon },
+  // { label: 'Ronin Assets', href: 'https://github.com/ronin-chain/ronin-assets', key: 'ronin-assets', icon: FileImageIcon },
+  { label: 'Get Testnet Token', href: 'https://faucet.roninchain.com/', key: 'ronin-faucet', icon: GasPumpIcon },
 ]
 
 const Layout: NextPage<Props> = ({ children }) => {
