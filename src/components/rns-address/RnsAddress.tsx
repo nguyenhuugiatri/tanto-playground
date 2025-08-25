@@ -43,7 +43,7 @@ export function RnsAddress() {
             onChange={e => setRnsName(e.target.value)}
           />
           <Button
-            text="Retrieve"
+            text="Resolve"
             shape={Shape.Default}
             intent={Intent.Primary}
             disabled={!rnsName}
