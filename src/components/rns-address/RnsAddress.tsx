@@ -3,7 +3,7 @@ import { useRnsAddress } from '@sky-mavis/tanto-widget'
 import { useState } from 'react'
 import { useDebounce } from 'use-debounce'
 import { isAddressEqual, zeroAddress } from 'viem'
-import { useChainId } from 'wagmi'
+import { saigon } from 'viem/chains'
 import { CodeExample } from '../code/code-example'
 import { ResultBox } from '../result-box/ResultBox'
 
@@ -20,10 +20,12 @@ function App() {
 `
 
 export function RnsAddress() {
-  const chainId = useChainId()
   const [rnsName, setRnsName] = useState(defaultRnsName)
   const [debouncedRnsName] = useDebounce(rnsName, 500)
-  const { data: address, isFetching, refetch } = useRnsAddress({ name: debouncedRnsName, chainId })
+  const { data: address, isFetching, refetch } = useRnsAddress({
+    name: debouncedRnsName,
+    chainId: saigon.id,
+  })
 
   return (
     <CodeExample

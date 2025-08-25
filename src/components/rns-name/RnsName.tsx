@@ -3,7 +3,7 @@ import { Button, Input, Intent, Shape } from '@axieinfinity/matcha'
 import { useRnsName } from '@sky-mavis/tanto-widget'
 import { useState } from 'react'
 import { useDebounce } from 'use-debounce'
-import { useChainId } from 'wagmi'
+import { saigon } from 'viem/chains'
 import { CodeExample } from '../code/code-example'
 import { ResultBox } from '../result-box/ResultBox'
 
@@ -20,10 +20,12 @@ function App() {
 `
 
 export function RnsName() {
-  const chainId = useChainId()
   const [address, setAddress] = useState(defaultAddress)
   const [debouncedAddress] = useDebounce(address, 500)
-  const { data: rnsName, isFetching, refetch } = useRnsName({ address: debouncedAddress, chainId })
+  const { data: rnsName, isFetching, refetch } = useRnsName({
+    address: debouncedAddress,
+    chainId: saigon.id,
+  })
 
   return (
     <CodeExample
