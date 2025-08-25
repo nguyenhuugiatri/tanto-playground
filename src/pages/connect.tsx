@@ -89,7 +89,7 @@ export default function Connect() {
             <Tabs.TabPane tab={tabs.modal.label} tabKey={tabs.modal.key} key={tabs.modal.key}>
               <div className="flex items-center justify-center pt-[5%] md:h-3/5">
                 <FadeView show>
-                  <div className={cn('rounded-12 px-48 py-36', {
+                  <div className={cn('rounded-32 p-1', {
                     'bg-white-1': theme === 'light',
                   })}
                   >
