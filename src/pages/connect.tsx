@@ -14,6 +14,7 @@ import { ThemeConfig } from '@/components/theme-config/ThemeConfig'
 import { WalletConfig } from '@/components/wallet-config/WalletConfig'
 import { useUiConfigStore } from '@/contexts/UiConfigProvider'
 import { useIsClient } from '@/hooks/useIsClient'
+import { cn } from '@/utils/cn'
 
 export function HeaderIcon({ title, icon: Icon }: { title: string, icon: FC<SvgIconProps> }) {
   return (
@@ -39,7 +40,7 @@ export default function Connect() {
     'sponsor',
     'button-options',
   ])
-  const buttonLabel = useUiConfigStore(state => state.buttonLabel)
+  const { buttonLabel, theme } = useUiConfigStore(state => ({ buttonLabel: state.buttonLabel, theme: state.theme }))
 
   const onCollapseChange = (activeKeys: Key | Key[]) =>
     setCollapseActiveKeys((Array.isArray(activeKeys) ? activeKeys : [activeKeys]).map(String))
@@ -88,7 +89,12 @@ export default function Connect() {
             <Tabs.TabPane tab={tabs.modal.label} tabKey={tabs.modal.key} key={tabs.modal.key}>
               <div className="flex items-center justify-center pt-[5%] md:h-3/5">
                 <FadeView show>
-                  <TantoConnectButton label={buttonLabel} />
+                  <div className={cn('rounded-12 px-48 py-36', {
+                    'bg-white-1': theme === 'light',
+                  })}
+                  >
+                    <TantoConnectButton label={buttonLabel} />
+                  </div>
                 </FadeView>
               </div>
             </Tabs.TabPane>
