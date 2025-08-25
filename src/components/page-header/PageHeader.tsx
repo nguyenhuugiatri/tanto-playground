@@ -1,51 +1,71 @@
+import type { SvgIconProps } from '@axieinfinity/matcha-icons'
 import type { FC, ReactNode } from 'react'
 import { Button, ButtonSize, Intent, Shape } from '@axieinfinity/matcha'
-import { BookOpenIcon, GithubLogoIcon } from '@axieinfinity/matcha-icons'
 import { useIsMobileView } from '@sky-mavis/tanto-widget/hooks/useIsMobileView'
 import Link from 'next/link'
-import { DOCS_LINK, MOBILE_BREAKPOINT, REPO_LINK } from '@/configs/constants'
+import { MOBILE_BREAKPOINT } from '@/configs/constants'
 
 interface PageHeaderProps {
   title: string
   description: ReactNode
   right?: ReactNode
-  docsLink?: string
-  repoLink?: string
+  primaryLink?: {
+    icon: FC<SvgIconProps>
+    label: string
+    url: string
+  }
+  secondaryLink?: {
+    icon: FC<SvgIconProps>
+    label: string
+    url: string
+  }
 }
 
 interface DocsLinksProps {
-  docsLink?: string
-  repoLink?: string
+  primaryLink?: {
+    icon: FC<SvgIconProps>
+    label: string
+    url: string
+  }
+  secondaryLink?: {
+    icon: FC<SvgIconProps>
+    label: string
+    url: string
+  }
 }
 
-export function DocsLinks({ docsLink = DOCS_LINK, repoLink = REPO_LINK }: DocsLinksProps) {
+export function DocsLinks({ primaryLink, secondaryLink }: DocsLinksProps) {
   const isMobile = useIsMobileView(MOBILE_BREAKPOINT)
 
   return (
     <>
-      <Link href={docsLink} target="_blank">
-        <Button
-          text="SDK Docs"
-          shape={Shape.Default}
-          intent={Intent.Primary}
-          icon={BookOpenIcon}
-          size={isMobile ? ButtonSize.Small : ButtonSize.Default}
-        />
-      </Link>
-      <Link href={repoLink} target="_blank">
-        <Button
-          text="SDK Repo"
-          shape={Shape.Default}
-          intent={Intent.Secondary}
-          icon={GithubLogoIcon}
-          size={isMobile ? ButtonSize.Small : ButtonSize.Default}
-        />
-      </Link>
+      {primaryLink && (
+        <Link href={primaryLink.url} target="_blank">
+          <Button
+            text={primaryLink.label}
+            shape={Shape.Default}
+            intent={Intent.Primary}
+            icon={primaryLink.icon}
+            size={isMobile ? ButtonSize.Small : ButtonSize.Default}
+          />
+        </Link>
+      )}
+      {secondaryLink && (
+        <Link href={secondaryLink.url} target="_blank">
+          <Button
+            text={secondaryLink.label}
+            shape={Shape.Default}
+            intent={Intent.Secondary}
+            icon={secondaryLink.icon}
+            size={isMobile ? ButtonSize.Small : ButtonSize.Default}
+          />
+        </Link>
+      )}
     </>
   )
 }
 
-export const PageHeader: FC<PageHeaderProps> = ({ title, description, right, docsLink, repoLink }) => {
+export const PageHeader: FC<PageHeaderProps> = ({ title, description, right, primaryLink, secondaryLink }) => {
   return (
     <div className="mb-32 flex flex-col justify-between gap-24 border-b py-24 lg:flex-row lg:py-40">
       <div>
@@ -53,7 +73,7 @@ export const PageHeader: FC<PageHeaderProps> = ({ title, description, right, doc
         <p className="text-balance text-body-m text-text-subdued">{description}</p>
       </div>
       <div className="flex gap-12">
-        {right ?? <DocsLinks docsLink={docsLink} repoLink={repoLink} />}
+        {right ?? <DocsLinks primaryLink={primaryLink} secondaryLink={secondaryLink} />}
       </div>
     </div>
   )

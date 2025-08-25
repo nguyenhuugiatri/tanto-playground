@@ -11,6 +11,7 @@ import {
   PaperPlaneTiltIcon,
   PlusIcon,
   SidebarIcon,
+  UserSquareIcon,
 } from '@axieinfinity/matcha-icons'
 import { useIsMobileView } from '@sky-mavis/tanto-widget/hooks/useIsMobileView'
 import { usePathname, useRouter } from 'next/navigation'
@@ -28,6 +29,7 @@ const menuItems: SidebarItem[] = [
   { label: 'Transfer Tokens', path: routes.transferTokens.path, key: 'transfer-tokens', icon: PaperPlaneTiltIcon },
   { label: 'Send Transaction', path: routes.sendTransaction.path, key: 'send-transaction', icon: ArrowsLeftRightIcon },
   { label: 'Buy Crypto', path: routes.buyCrypto.path, key: 'buy-crypto', icon: PlusIcon },
+  { label: 'Ronin Name Service', path: routes.rns.path, key: 'rns', icon: UserSquareIcon },
 ]
 
 const linkItems: SidebarItem[] = [

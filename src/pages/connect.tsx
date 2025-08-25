@@ -1,7 +1,7 @@
 import type { SvgIconProps } from '@axieinfinity/matcha-icons'
 import type { FC, Key, ReactNode } from 'react'
 import { Collapse, Tabs, TabsVariant } from '@axieinfinity/matcha'
-import { GasPumpIcon, PaletteIcon, RectangleIcon, ShareNetworkIcon, WalletIcon } from '@axieinfinity/matcha-icons'
+import { BookOpenIcon, GasPumpIcon, GithubLogoIcon, PaletteIcon, RectangleIcon, ShareNetworkIcon, WalletIcon } from '@axieinfinity/matcha-icons'
 import { TantoConnectButton, TantoEmbeddedWidget } from '@sky-mavis/tanto-widget'
 import { useState } from 'react'
 import { AuthConfig } from '@/components/auth-config/AuthConfig'
@@ -12,6 +12,7 @@ import { PageHeader } from '@/components/page-header/PageHeader'
 import { SponsorConfig } from '@/components/sponsor-config/SponsorConfig'
 import { ThemeConfig } from '@/components/theme-config/ThemeConfig'
 import { WalletConfig } from '@/components/wallet-config/WalletConfig'
+import { DOCS_LINK, REPO_LINK } from '@/configs/constants'
 import { useUiConfigStore } from '@/contexts/UiConfigProvider'
 import { useIsClient } from '@/hooks/useIsClient'
 import { cn } from '@/utils/cn'
@@ -50,6 +51,16 @@ export default function Connect() {
       <PageHeader
         title="Tanto Widget"
         description="A React component library designed to provide a seamless Connect Wallet experience for Web3 applications, with a focus on Ronin Wallets and Ethereum-compatible wallets."
+        primaryLink={{
+          icon: BookOpenIcon,
+          label: 'Tanto Docs',
+          url: DOCS_LINK,
+        }}
+        secondaryLink={{
+          icon: GithubLogoIcon,
+          label: 'Tanto Repo',
+          url: REPO_LINK,
+        }}
       />
       <div className="flex min-h-0 grow flex-col gap-24 pb-[10vh] lg:flex-row">
         <div className="order-2 h-full min-h-0 lg:order-1 lg:border-r lg:pr-24 xl:min-w-[400px]">

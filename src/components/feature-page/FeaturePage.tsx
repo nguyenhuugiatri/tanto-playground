@@ -1,28 +1,38 @@
-import type { ReactNode } from 'react'
+import type { SvgIconProps } from '@axieinfinity/matcha-icons'
+import type { FC, ReactNode } from 'react'
 import { TantoConnectButton } from '@sky-mavis/tanto-widget'
 import { useAccount } from 'wagmi'
 import { PageHeader } from '@/components/page-header/PageHeader'
 import { WalletCard } from '@/components/wallet-card/WalletCard'
 
-interface ConnectRequiredPageProps {
+interface FeaturePageProps {
+  connectRequired?: boolean
   title: string
   description: string
   children: ReactNode
-  docsLink?: string
-  repoLink?: string
+  primaryLink?: {
+    icon: FC<SvgIconProps>
+    label: string
+    url: string
+  }
+  secondaryLink?: {
+    icon: FC<SvgIconProps>
+    label: string
+    url: string
+  }
 }
 
-export function ConnectRequiredPage({ title, description, children, docsLink, repoLink }: ConnectRequiredPageProps) {
+export function FeaturePage({ title, description, children, primaryLink, secondaryLink, connectRequired = false }: FeaturePageProps) {
   const { isConnected } = useAccount()
 
   return (
     <div>
-      <PageHeader title={title} description={description} docsLink={docsLink} repoLink={repoLink} />
+      <PageHeader title={title} description={description} primaryLink={primaryLink} secondaryLink={secondaryLink} />
 
       <div className="relative pb-[10vh]">
         <WalletCard className="mb-32" />
 
-        {!isConnected && (
+        {!isConnected && connectRequired && (
           <div className="absolute inset-0 z-10 flex justify-center rounded-xl backdrop-blur-sm">
             <div className="sticky mt-[20vh] flex flex-col items-center">
               <p className="mb-8 text-h5">Wallet Not Connected</p>

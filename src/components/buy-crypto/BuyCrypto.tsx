@@ -36,7 +36,7 @@ function App() {
 
 export function BuyCrypto() {
   const toast = useToast()
-  const { isConnected, address } = useAccount()
+  const { address } = useAccount()
   const [cryptoCurrency, setCryptoCurrency] = useState(SUPPORTED_CRYPTOCURRENCIES[0])
   const [fiatCurrency, setFiatCurrency] = useState(SUPPORTED_FIAT_CURRENCIES[0])
   const [fiatAmount, setFiatAmount] = useState<string>(defaultAmount)
@@ -137,8 +137,8 @@ export function BuyCrypto() {
 
           <Button
             text="Buy crypto"
+            intent={Intent.Primary}
             shape={Shape.Default}
-            intent={isConnected ? Intent.Primary : Intent.Default}
             onClick={handleTransferRon}
           />
         </div>

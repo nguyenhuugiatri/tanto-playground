@@ -30,8 +30,8 @@ export const WalletCard: FC<WalletCardProps> = ({ className }) => {
 
   return (
     <div className={cn('overflow-hidden rounded-12 bg-black-8 px-20 py-16', className)}>
-      <div className="grid md:grid-cols-12">
-        <div className="grid gap-12 md:col-span-10 md:grid-cols-4 md:gap-24">
+      <div className="grid gap-12 sm:gap-0 lg:grid-cols-12">
+        <div className="grid gap-12 lg:col-span-10 lg:grid-cols-4 lg:gap-24">
           <PairInfo
             label="Wallet"
             value={(
@@ -68,7 +68,7 @@ export const WalletCard: FC<WalletCardProps> = ({ className }) => {
           />
         </div>
 
-        <div className="flex items-center justify-end md:col-span-2">
+        <div className="flex items-center justify-end lg:col-span-2">
           <Button
             shape={Shape.Default}
             icon={SignOutFillIcon}

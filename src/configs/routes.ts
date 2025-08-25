@@ -31,4 +31,8 @@ export const routes = {
     '/buy',
     () => '/buy',
   ),
+  rns: createRoute(
+    '/rns',
+    () => '/rns',
+  ),
 }

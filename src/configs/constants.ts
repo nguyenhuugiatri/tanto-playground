@@ -2,6 +2,9 @@ export const MOBILE_BREAKPOINT = 768
 export const DOCS_LINK = 'https://github.com/skymavis/tanto-kit/blob/main/packages/widget/README.md'
 export const REPO_LINK = 'https://github.com/skymavis/tanto-kit'
 export const BUY_CRYPTO_DOCS_LINK = 'https://docs.skymavis.com/mavis/ronin-waypoint/reference/web-utilities-sdk'
+export const BUY_CRYPTO_REPO_LINK = 'https://github.com/skymavis/waypoint-js/tree/main/packages/waypoint/deposit'
+export const RNS_DOCS_LINK = 'https://support.roninchain.com/hc/en-us/articles/20341306085403-Ronin-Name-Service-Overview'
+export const RNS_HOMEPAGE_LINK = 'https://id.roninchain.com/'
 export const SUPPORTED_CRYPTOCURRENCIES = [
   { key: 'RON', label: 'Ronin', value: 'RON' },
   { key: 'AXS', label: 'Axie Infinity Shard', value: 'AXS' },
