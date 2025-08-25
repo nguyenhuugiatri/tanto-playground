@@ -15,6 +15,7 @@ export function RenderCode(props: {
       )}
     >
       <div
+        className="overflow-x-auto"
         dangerouslySetInnerHTML={{ __html: props.html }}
       />
       {props.showCopyButton && (

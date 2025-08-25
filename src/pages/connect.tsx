@@ -82,7 +82,7 @@ export default function Connect() {
             <Tabs.TabPane tab={tabs.embedded.label} tabKey={tabs.embedded.key} key={tabs.embedded.key}>
               <div className="flex h-full justify-center pt-[5%]">
                 <FadeView show>
-                  <TantoEmbeddedWidget className="h-fit !w-[calc(100vw-2*24px)] rounded-20 !pt-12 sm:!w-[420px]" />
+                  <TantoEmbeddedWidget className="h-fit !w-[calc(100vw-2*18px)] rounded-20 !pt-12 sm:!w-[420px]" />
                 </FadeView>
               </div>
             </Tabs.TabPane>
