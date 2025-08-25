@@ -7,7 +7,7 @@ export function SponsorConfig() {
       <p>
         <Link
           className="underline hover:cursor-pointer"
-          href="https://docs.skymavis.com/en/docs/referral-program/ronin-referral-program"
+          href="https://docs.skymavis.com/mavis/ronin-waypoint/guides/sponsor-gas"
           target="_blank"
         >
           Check out the docs

@@ -19,7 +19,7 @@ export function AuthConfig() {
             {' '}
             <Link
               className="underline hover:cursor-pointer"
-              href="https://docs.skymavis.com/en/docs/referral-program/ronin-referral-program"
+              href="https://www.notion.so/skymavis/Ronin-Referral-Program-1c1c48ae3fdd80d2a5b8ffb11bf300da"
               target="_blank"
             >
               Ronin Referral Program
