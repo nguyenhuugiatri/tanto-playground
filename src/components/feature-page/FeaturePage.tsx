@@ -1,5 +1,5 @@
-import type { SvgIconProps } from '@axieinfinity/matcha-icons'
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import type { LinkConfig } from '@/components/page-header/PageHeader'
 import { TantoConnectButton } from '@sky-mavis/tanto-widget'
 import { useAccount } from 'wagmi'
 import { PageHeader } from '@/components/page-header/PageHeader'
@@ -10,16 +10,8 @@ interface FeaturePageProps {
   title: string
   description: string
   children: ReactNode
-  primaryLink?: {
-    icon: FC<SvgIconProps>
-    label: string
-    url: string
-  }
-  secondaryLink?: {
-    icon: FC<SvgIconProps>
-    label: string
-    url: string
-  }
+  primaryLink?: LinkConfig
+  secondaryLink?: LinkConfig
 }
 
 export function FeaturePage({ title, description, children, primaryLink, secondaryLink, connectRequired = false }: FeaturePageProps) {
