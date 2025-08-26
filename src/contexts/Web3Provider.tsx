@@ -40,6 +40,7 @@ export function Web3Provider(props: PropsWithChildren) {
             excludedWalletIds,
             clientId: 'dbe1e3ff-e145-422f-84c4-e0beb4972f69',
             __internal_waypointBaseUrl: 'https://waypoint-api.skymavis.one/v1/rpc/public',
+            __internal_mpcBaseUrlV1: 'https://project-x.skymavis.one/v1/public',
             __internal_mpcBaseUrl:
             'https://growing-narwhal-infinitely.ngrok-free.app/v1/public/rpc',
             __internal_mpcSocketUrl: 'wss://project-x.skymavis.one',
