@@ -1,5 +1,6 @@
+import type { TantoWidgetThemeTokens } from '@sky-mavis/tanto-widget'
 import type { PropsWithChildren } from 'react'
-import { getDefaultConfig, TantoProvider } from '@sky-mavis/tanto-widget'
+import { darkTheme, getDefaultConfig, lightTheme, TantoProvider } from '@sky-mavis/tanto-widget'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { domAnimation, LazyMotion } from 'motion/react'
 import { WagmiProvider } from 'wagmi'
@@ -24,16 +25,18 @@ const queryClient = new QueryClient()
 
 export function Web3Provider(props: PropsWithChildren) {
   const theme = useUiConfigStore(state => state.theme)
-  const { createAccountOnConnect, excludedWalletIds } = useUiConfigStore(state => ({
+  const { createAccountOnConnect, excludedWalletIds, customThemeTokens } = useUiConfigStore(state => ({
     createAccountOnConnect: state.createAccountOnConnect,
     excludedWalletIds: state.excludedWalletIds,
+    customThemeTokens: state.customThemeTokens,
   }))
 
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <TantoProvider
-          theme={theme}
+          // TODO: demo custom dark theme
+          theme={theme === 'custom' ? lightTheme(customThemeTokens) : theme}
           config={{
             initialChainId,
             createAccountOnConnect,
