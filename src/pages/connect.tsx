@@ -1,12 +1,13 @@
 import type { SvgIconProps } from '@axieinfinity/matcha-icons'
 import type { FC, Key, ReactNode } from 'react'
 import { Collapse, Tabs, TabsVariant } from '@axieinfinity/matcha'
-import { BookOpenIcon, GasPumpIcon, GithubLogoIcon, PaletteIcon, RectangleIcon, ShareNetworkIcon, WalletIcon } from '@axieinfinity/matcha-icons'
+import { BookOpenIcon, GasPumpIcon, GithubLogoIcon, ListChecksIcon, PaletteIcon, RectangleIcon, ShareNetworkIcon, WalletIcon } from '@axieinfinity/matcha-icons'
 import { TantoConnectButton, TantoEmbeddedWidget } from '@sky-mavis/tanto-widget'
 import { useState } from 'react'
 import { AuthConfig } from '@/components/auth-config/AuthConfig'
 import { ButtonConfig } from '@/components/button-config/ButtonConfig'
 import { FadeView } from '@/components/fade-view/FadeView'
+import { HeadlessConfig } from '@/components/headless-config/HeadlessConfig'
 import Layout from '@/components/layout/Layout'
 import { PageHeader } from '@/components/page-header/PageHeader'
 import { SponsorConfig } from '@/components/sponsor-config/SponsorConfig'
@@ -39,6 +40,7 @@ export default function Connect() {
     'appearance',
     'referral',
     'sponsor',
+    'headless-configs',
     'button-options',
   ])
   const { buttonLabel, theme } = useUiConfigStore(state => ({ buttonLabel: state.buttonLabel, theme: state.theme }))
@@ -63,7 +65,7 @@ export default function Connect() {
         }}
       />
       <div className="flex min-h-0 grow flex-col gap-24 pb-[10vh] lg:flex-row">
-        <div className="order-2 h-full min-h-0 lg:order-1 lg:border-r lg:pr-24 xl:min-w-[400px]">
+        <div className="order-2 h-full min-h-0 lg:order-1 lg:max-w-[460px] lg:border-r lg:pr-24 xl:min-w-[400px]">
           <div className="-m-8 h-full overflow-auto p-8 scrollbar-none">
             {isClient && (
               <Collapse
@@ -74,7 +76,8 @@ export default function Connect() {
                   { key: 'wallets', title: <HeaderIcon title="Wallets" icon={WalletIcon} />, content: <WalletConfig /> },
                   { key: 'appearance', title: <HeaderIcon title="Appearance" icon={PaletteIcon} />, content: <ThemeConfig /> },
                   { key: 'referral', title: <HeaderIcon title="Referral Program" icon={ShareNetworkIcon} />, content: <AuthConfig /> },
-                  { key: 'sponsor', title: <HeaderIcon title="Sponsor gas fees" icon={GasPumpIcon} />, content: <SponsorConfig /> },
+                  { key: 'sponsor', title: <HeaderIcon title="Sponsor Gas Fees" icon={GasPumpIcon} />, content: <SponsorConfig /> },
+                  { key: 'headless-configs', title: <HeaderIcon title="Wallet Headless Configs" icon={ListChecksIcon} />, content: <HeadlessConfig /> },
                   { key: 'button-options', title: <HeaderIcon title="Button Options" icon={RectangleIcon} />, content: <ButtonConfig /> },
                 ]}
               />

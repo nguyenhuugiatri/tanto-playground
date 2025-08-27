@@ -1,6 +1,5 @@
-import type { TantoWidgetThemeTokens } from '@sky-mavis/tanto-widget'
 import type { PropsWithChildren } from 'react'
-import { darkTheme, getDefaultConfig, lightTheme, TantoProvider } from '@sky-mavis/tanto-widget'
+import { getDefaultConfig, lightTheme, TantoProvider } from '@sky-mavis/tanto-widget'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { domAnimation, LazyMotion } from 'motion/react'
 import { WagmiProvider } from 'wagmi'
@@ -25,10 +24,11 @@ const queryClient = new QueryClient()
 
 export function Web3Provider(props: PropsWithChildren) {
   const theme = useUiConfigStore(state => state.theme)
-  const { createAccountOnConnect, excludedWalletIds, customThemeTokens } = useUiConfigStore(state => ({
+  const { createAccountOnConnect, excludedWalletIds, customThemeTokens, showConfirmationModal } = useUiConfigStore(state => ({
     createAccountOnConnect: state.createAccountOnConnect,
     excludedWalletIds: state.excludedWalletIds,
     customThemeTokens: state.customThemeTokens,
+    showConfirmationModal: state.showConfirmationModal,
   }))
 
   return (
@@ -39,15 +39,15 @@ export function Web3Provider(props: PropsWithChildren) {
           theme={theme === 'custom' ? lightTheme(customThemeTokens) : theme}
           config={{
             initialChainId,
-            createAccountOnConnect,
             excludedWalletIds,
+            createAccountOnConnect,
+            showConfirmationModal,
             clientId: 'dbe1e3ff-e145-422f-84c4-e0beb4972f69',
             __internal_waypointBaseUrl: 'https://waypoint-api.skymavis.one/v1/rpc/public',
             __internal_mpcBaseUrlV1: 'https://project-x.skymavis.one/v1/public',
             __internal_mpcBaseUrl:
             'https://growing-narwhal-infinitely.ngrok-free.app/v1/public/rpc',
             __internal_mpcSocketUrl: 'wss://project-x.skymavis.one',
-            showConfirmationModal: true,
           }}
         >
           <LazyMotion features={domAnimation}>{props.children}</LazyMotion>

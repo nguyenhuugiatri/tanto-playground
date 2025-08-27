@@ -6,10 +6,11 @@ import { persist } from 'zustand/middleware'
 
 export interface UiConfig {
   excludedWalletIds: WalletId[]
-  createAccountOnConnect: boolean
   theme: TantoWidgetThemeMode | 'custom'
   customThemeTokens: TantoWidgetCustomThemeTokens
   buttonLabel: string
+  createAccountOnConnect: boolean
+  showConfirmationModal: boolean
 }
 
 export const DEFAULT_CONFIG: UiConfig = {
@@ -18,6 +19,7 @@ export const DEFAULT_CONFIG: UiConfig = {
   customThemeTokens: {} as TantoWidgetCustomThemeTokens,
   buttonLabel: 'Connect Wallet',
   createAccountOnConnect: false,
+  showConfirmationModal: true,
 }
 
 export type UiConfigState = UiConfig & {
@@ -26,6 +28,7 @@ export type UiConfigState = UiConfig & {
   setCustomThemeTokens: (customThemeTokens: TantoWidgetCustomThemeTokens) => void
   setButtonLabel: (buttonLabel: string) => void
   setCreateAccountOnConnect: (createAccountOnConnect: boolean) => void
+  setShowConfirmationModal: (showConfirmationModal: boolean) => void
 }
 
 function createInitialState(initialConfig?: UiConfig): StateCreator<UiConfigState> {
@@ -38,6 +41,7 @@ function createInitialState(initialConfig?: UiConfig): StateCreator<UiConfigStat
     setCustomThemeTokens: customThemeTokens => set({ customThemeTokens }),
     setButtonLabel: buttonLabel => set({ buttonLabel }),
     setCreateAccountOnConnect: createAccountOnConnect => set({ createAccountOnConnect }),
+    setShowConfirmationModal: showConfirmationModal => set({ showConfirmationModal }),
   })
 }
 
@@ -52,6 +56,7 @@ export function createUiConfigStore(initialConfig: UiConfig = DEFAULT_CONFIG) {
         buttonLabel: state.buttonLabel,
         createAccountOnConnect: state.createAccountOnConnect,
         customThemeTokens: state.customThemeTokens,
+        showConfirmationModal: state.showConfirmationModal,
       }),
     }),
   )
