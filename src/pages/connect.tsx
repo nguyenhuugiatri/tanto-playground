@@ -1,7 +1,7 @@
 import type { SvgIconProps } from '@axieinfinity/matcha-icons'
 import type { FC, Key, ReactNode } from 'react'
 import { Collapse, Tabs, TabsVariant } from '@axieinfinity/matcha'
-import { BookOpenIcon, GasPumpIcon, GithubLogoIcon, ListChecksIcon, PaletteIcon, RectangleIcon, ShareNetworkIcon, WalletIcon } from '@axieinfinity/matcha-icons'
+import { BookOpenIcon, EnvelopeIcon, GasPumpIcon, GithubLogoIcon, ListChecksIcon, PaletteIcon, RectangleIcon, ShareNetworkIcon, WalletIcon } from '@axieinfinity/matcha-icons'
 import { TantoConnectButton, TantoEmbeddedWidget } from '@sky-mavis/tanto-widget'
 import { useState } from 'react'
 import { AuthConfig } from '@/components/auth-config/AuthConfig'
@@ -10,6 +10,7 @@ import { FadeView } from '@/components/fade-view/FadeView'
 import { HeadlessConfig } from '@/components/headless-config/HeadlessConfig'
 import Layout from '@/components/layout/Layout'
 import { PageHeader } from '@/components/page-header/PageHeader'
+import { SocialConfig } from '@/components/social-config/SocialConfig'
 import { SponsorConfig } from '@/components/sponsor-config/SponsorConfig'
 import { ThemeConfig } from '@/components/theme-config/ThemeConfig'
 import { WalletConfig } from '@/components/wallet-config/WalletConfig'
@@ -37,6 +38,7 @@ export default function Connect() {
   const [tab, setTab] = useState(tabs.embedded.key)
   const [collapseActiveKeys, setCollapseActiveKeys] = useState<string[]>([
     'wallets',
+    'socials',
     'appearance',
     'referral',
     'sponsor',
@@ -74,6 +76,7 @@ export default function Connect() {
                 collapseClassName="[&_.dango-collapse-content-box]:relative [&_.dango-collapse-content-box]:before:absolute [&_.dango-collapse-content-box]:before:left-0 [&_.dango-collapse-content-box]:before:bottom-0 [&_.dango-collapse-content-box]:before:content-[''] [&_.dango-collapse-content-box]:before:bg-black-6  [&_.dango-collapse-content-box]:before:h-[calc(100%-8px)] [&_.dango-collapse-content-box]:before:w-1 [&_.dango-collapse-content-box]:before:z-10 [&_.dango-collapse-content-box]:pl-16 [&_.dango-collapse-content-box]:ml-8"
                 collapseItemList={[
                   { key: 'wallets', title: <HeaderIcon title="Wallets" icon={WalletIcon} />, content: <WalletConfig /> },
+                  { key: 'socials', title: <HeaderIcon title="Socials" icon={EnvelopeIcon} />, content: <SocialConfig /> },
                   { key: 'appearance', title: <HeaderIcon title="Appearance" icon={PaletteIcon} />, content: <ThemeConfig /> },
                   { key: 'referral', title: <HeaderIcon title="Referral Program" icon={ShareNetworkIcon} />, content: <AuthConfig /> },
                   { key: 'sponsor', title: <HeaderIcon title="Sponsor Gas Fees" icon={GasPumpIcon} />, content: <SponsorConfig /> },

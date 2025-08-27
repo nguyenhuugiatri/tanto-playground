@@ -24,9 +24,10 @@ const queryClient = new QueryClient()
 
 export function Web3Provider(props: PropsWithChildren) {
   const theme = useUiConfigStore(state => state.theme)
-  const { createAccountOnConnect, excludedWalletIds, customThemeTokens, showConfirmationModal } = useUiConfigStore(state => ({
+  const { createAccountOnConnect, excludedWalletIds, excludedSocialProviders, customThemeTokens, showConfirmationModal } = useUiConfigStore(state => ({
     createAccountOnConnect: state.createAccountOnConnect,
     excludedWalletIds: state.excludedWalletIds,
+    excludedSocialProviders: state.excludedSocialProviders,
     customThemeTokens: state.customThemeTokens,
     showConfirmationModal: state.showConfirmationModal,
   }))
@@ -40,6 +41,7 @@ export function Web3Provider(props: PropsWithChildren) {
           config={{
             initialChainId,
             excludedWalletIds,
+            excludedSocialProviders,
             createAccountOnConnect,
             showConfirmationModal,
             clientId: 'dbe1e3ff-e145-422f-84c4-e0beb4972f69',

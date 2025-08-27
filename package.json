@@ -12,7 +12,7 @@
   "dependencies": {
     "@axieinfinity/matcha": "^0.1.39",
     "@axieinfinity/matcha-icons": "^0.1.7",
-    "@sky-mavis/tanto-widget": "file:sky-mavis-tanto-widget-v0.0.4-alpha.3.tgz",
+    "@sky-mavis/tanto-widget": "file:sky-mavis-tanto-widget-v0.0.4-alpha.10.tgz",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@tanstack/react-query": "^5.83.0",
     "motion": "^12.23.6",
